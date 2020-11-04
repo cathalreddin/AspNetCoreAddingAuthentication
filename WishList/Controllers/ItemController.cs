@@ -38,7 +38,7 @@ namespace WishList.Controllers
         public IActionResult Create(Models.Item item)
         {
             var user = _userManager.GetUserAsync(HttpContext.User);
-            item.User = user;
+            //item.User = user;
             _context.Items.Add(item);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -47,10 +47,10 @@ namespace WishList.Controllers
         public IActionResult Delete(int id)
         {
             var item = _context.Items.FirstOrDefault(e => e.Id == id);
-            if (item.User.Id != _userManager.GetUserAsync(HttpContext.User).Id)
-            {
-                return Unauthorized();
-            }
+           // if (item.User != _userManager.GetUserAsync(HttpContext.User))
+           // {
+           //     return Unauthorized();
+           // }
             _context.Items.Remove(item);
             _context.SaveChanges();
             return RedirectToAction("Index");
